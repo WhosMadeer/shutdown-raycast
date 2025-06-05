@@ -2,9 +2,22 @@ import { Action, ActionPanel, closeMainWindow, Form, LocalStorage, showHUD } fro
 import { runAppleScript, showFailureToast } from "@raycast/utils";
 import { exec } from "child_process";
 
-export default function ScheduleShutdown() {
-    const handleSubmit = async (values: { input: string }) => {
+export default function Command() {
+    const handleSubmit = async (values: { input: string; instruction: string }) => {
+        const pid = await LocalStorage.getItem<number>("pid");
+
+        if (pid) {
+            try {
+                process.kill(pid);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        await LocalStorage.removeItem("timerEnd");
+        await LocalStorage.removeItem("pid");
+
         const input = values["input"].split(" "); // seperate strings into the parts
+        const instruction = values["instruction"];
 
         const numbers = input.filter((string) => {
             return !isNaN(Number(string));
@@ -19,8 +32,6 @@ export default function ScheduleShutdown() {
             return isNaN(Number(string));
         });
 
-        console.log(numbers, units);
-
         let timer = 0;
 
         numbers.forEach((value, index) => {
@@ -33,7 +44,7 @@ export default function ScheduleShutdown() {
                     timer += number * 60; // minutes -> seconds
                 }
             } else {
-                timer += number; // defaults to minutes
+                timer += number * 60; // defaults to minutes
             }
         });
 
@@ -44,7 +55,7 @@ export default function ScheduleShutdown() {
             osascript -e 'on run argv
                 delay (item 1 of argv)
                 tell application "Finder"
-                    make new Finder window
+                    ${instruction}
                 end tell
             end run' ${timer}
         `;
@@ -57,6 +68,8 @@ export default function ScheduleShutdown() {
         */
 
         await LocalStorage.setItem("timerEnd", Date.now() + Number(timer) * 1000); // using millisecond
+        processRef.pid && (await LocalStorage.setItem("pid", processRef.pid)); // store pid in LocalStorage
+
         await closeMainWindow({ clearRootSearch: true });
     };
 
@@ -69,6 +82,11 @@ export default function ScheduleShutdown() {
             }
         >
             <Form.TextField id="input" title="Set time here" />
+            <Form.Dropdown id="instruction" title="Instruction">
+                <Form.Dropdown.Item value="shut down" title="Shut down PC" />
+                <Form.Dropdown.Item value="restart" title="Restart PC" />
+                <Form.Dropdown.Item value="sleep" title="Sleep PC" />
+            </Form.Dropdown>
             {/* <Form.Dropdown id="timer" title="Timer">
                 <Form.Dropdown.Item value="1" title="1 minutes" />
 

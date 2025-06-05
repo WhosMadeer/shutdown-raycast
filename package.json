@@ -19,6 +19,12 @@
             "title": "Schedule Shutdown",
             "description": "",
             "mode": "view"
+        },
+        {
+            "name": "stop-shutdown",
+            "title": "Stop Shutdown",
+            "description": "",
+            "mode": "no-view"
         }
     ],
     "dependencies": {
