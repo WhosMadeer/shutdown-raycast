@@ -1,29 +1,32 @@
 {
     "$schema": "https://www.raycast.com/schemas/extension.json",
-    "name": "shutdown-raycast",
-    "title": "Shutdown Raycast Extension",
-    "description": "Schedule shutdowns and resets on a timer",
-    "icon": "extension-icon.png",
+    "name": "shutdown-timer",
+    "title": "Shutdown Timer Raycast Extension",
+    "description": "Schedule shutdowns and restarts on a timer",
+    "icon": "power-icon.png",
     "author": "whosmadeer",
     "license": "MIT",
+    "categories": [
+        "System"
+    ],
     "commands": [
         {
             "name": "remaining-time",
             "title": "Remaining Time",
-            "description": "",
+            "description": "Tells you how much time remaining",
             "mode": "no-view",
-            "interval": "1m"
+            "interval": "30s"
         },
         {
             "name": "schedule-shutdown",
             "title": "Schedule Shutdown",
-            "description": "",
+            "description": "Schedule shutdown timer",
             "mode": "view"
         },
         {
             "name": "stop-shutdown",
             "title": "Stop Shutdown",
-            "description": "",
+            "description": "Stop current shutdown",
             "mode": "no-view"
         }
     ],
