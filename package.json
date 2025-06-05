@@ -8,10 +8,11 @@
     "license": "MIT",
     "commands": [
         {
-            "name": "timed-shutdowns",
-            "title": "Timed Shutdowns",
+            "name": "remaining-time",
+            "title": "Remaining Time",
             "description": "",
-            "mode": "view"
+            "mode": "no-view",
+            "interval": "1m"
         },
         {
             "name": "schedule-shutdown",
