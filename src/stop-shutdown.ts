@@ -1,10 +1,8 @@
-import { Detail, environment, LocalStorage, showHUD, updateCommandMetadata } from "@raycast/api";
-import { useEffect, useState } from "react";
+import { LocalStorage, showHUD } from "@raycast/api";
 
 export default async function Command() {
     const pid = await LocalStorage.getItem<number>("pid");
 
-    console.log(pid);
     try {
         if (!pid) {
             await showHUD("No active shutdown sequence.");

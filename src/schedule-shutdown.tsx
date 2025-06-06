@@ -76,7 +76,7 @@ export default function Command() {
         */
 
             await LocalStorage.setItem("timerEnd", Date.now() + Number(timer) * 1000); // using millisecond
-            processRef.pid && (await LocalStorage.setItem("pid", processRef.pid)); // store pid in LocalStorage
+            if (processRef.pid) await LocalStorage.setItem("pid", processRef.pid); // store pid in LocalStorage
 
             await showHUD("Started Shutdown Sequence");
         },

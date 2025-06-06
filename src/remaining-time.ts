@@ -1,5 +1,4 @@
-import { Detail, environment, LocalStorage, showHUD, updateCommandMetadata } from "@raycast/api";
-import { useEffect, useState } from "react";
+import { LocalStorage, updateCommandMetadata } from "@raycast/api";
 
 export default async function Command() {
     const storedEnd = await LocalStorage.getItem<number>("timerEnd");
