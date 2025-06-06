@@ -22,6 +22,8 @@ export default function Command() {
             await LocalStorage.removeItem("timerEnd");
             await LocalStorage.removeItem("pid");
 
+            await closeMainWindow({ clearRootSearch: true });
+
             const input = values["input"].split(" "); // seperate strings into the parts
             const instruction = values["instruction"];
 
@@ -76,7 +78,7 @@ export default function Command() {
             await LocalStorage.setItem("timerEnd", Date.now() + Number(timer) * 1000); // using millisecond
             processRef.pid && (await LocalStorage.setItem("pid", processRef.pid)); // store pid in LocalStorage
 
-            await closeMainWindow({ clearRootSearch: true });
+            await showHUD("Started Shutdown Sequence");
         },
         initialValues: {
             instruction: "shut down",
