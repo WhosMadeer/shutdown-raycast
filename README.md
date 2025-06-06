@@ -1,6 +1,6 @@
 # Timed Controlled Shutdown for Raycast
 
-A Raycast extension that allows users to schedule a controlled shutdown for their system, ensuring tasks can complete before powering down.
+A Raycast extension that allows users to schedule a controlled shutdown for their system, ensuring tasks can complete before powering down. I made this because I wanted to simplify scheduling shutdowns so that I didn't need to have an extra terminal window to manage it
 
 ## Features
 
