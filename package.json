@@ -1,7 +1,7 @@
 {
     "$schema": "https://www.raycast.com/schemas/extension.json",
     "name": "shutdown-timer",
-    "title": "Shutdown Timer Raycast Extension",
+    "title": "Shutdown Timer",
     "description": "Schedule shutdowns and restarts on a timer",
     "icon": "power-icon.png",
     "author": "whosmadeer",
